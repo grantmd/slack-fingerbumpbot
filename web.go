@@ -75,8 +75,7 @@ func init() {
 						if err != nil {
 							log.Fatal(err)
 						}
-					}
-					else{
+					} else {
 						log.Print("Bump has already been completed")
 					}
 				} else {
