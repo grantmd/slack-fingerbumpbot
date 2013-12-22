@@ -56,8 +56,9 @@ func init() {
 			// Wait 1 minute and then see if anyone replied
 			log.Print("Waiting to bump")
 			go func() {
-				time.Sleep(60 * time.Second)
+				time.Sleep(30 * time.Second)
 
+				log.Print("Checking history")
 				messages, err := MakeHistoryCall(r.PostFormValue("channel_id"), r.PostFormValue("timestamp"))
 				if err != nil {
 					needsResponse := true
@@ -74,6 +75,9 @@ func init() {
 						if err != nil {
 							log.Fatal(err)
 						}
+					}
+					else{
+						log.Print("Bump has already been completed")
 					}
 				} else {
 					log.Fatal(err)
