@@ -11,21 +11,26 @@ import (
 var (
 	httpPort    int
 	botUsername string
+
+	apiKey       string
+	webhookToken string
 )
 
 func main() {
 	// Parse command-line options
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "usage: ./slack-fingerbumpbot -port=8002\n")
+		fmt.Fprintf(os.Stderr, "usage: ./slack-fingerbumpbot -apiKey=xoxp-xxxx -webhookToken=xxxx -port=8002\n")
 		flag.PrintDefaults()
 	}
 
+	flag.StringVar(&apiKey, "apiKey", "", "Your Slack API key")
+	flag.StringVar(&webhookToken, "webhookToken", "", "Your incoming webhook token")
 	flag.IntVar(&httpPort, "port", 8002, "The HTTP port on which to listen")
 	flag.StringVar(&botUsername, "botUsername", "fingerbumpbot", "The name of the bot when it speaks")
 
 	flag.Parse()
 
-	if httpPort == 0 {
+	if httpPort == 0 || apiKey == "" || webhookToken == "" {
 		flag.Usage()
 		os.Exit(2)
 	}
