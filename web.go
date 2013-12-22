@@ -121,6 +121,7 @@ func MakeHistoryCall(channel_id string, ts string) ([]ChannelMessage, error) {
 	apiUrl.RawQuery = apiParams.Encode()
 
 	// Execute call
+	log.Print(apiUrl.String())
 	res, err := http.Get(apiUrl.String())
 	if err != nil {
 		return nil, err
@@ -137,7 +138,7 @@ func MakeHistoryCall(channel_id string, ts string) ([]ChannelMessage, error) {
 	}
 
 	if h.Ok != true {
-		return nil, errors.New(h.Error)
+		return nil, errors.New("API Error: " + h.Error)
 	}
 
 	return h.Messages, nil
