@@ -60,7 +60,7 @@ func init() {
 
 				log.Print("Checking history")
 				messages, err := MakeHistoryCall(r.PostFormValue("channel_id"), r.PostFormValue("timestamp"))
-				if err != nil {
+				if err == nil {
 					log.Printf("History returned %d new messages", len(messages))
 					needsResponse := true
 					for _, m := range messages {
