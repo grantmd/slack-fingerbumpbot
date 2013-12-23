@@ -64,7 +64,7 @@ func init() {
 					log.Printf("History returned %d new messages", len(messages))
 					needsResponse := true
 					for _, m := range messages {
-						if strings.Contains(m.Text, ":point_right") {
+						if strings.Contains(m.Text, ":point_left") {
 							needsResponse = false
 							break
 						}
